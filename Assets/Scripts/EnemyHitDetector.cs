@@ -3,15 +3,29 @@ using TMPro;
 
 public class EnemyHitDetector : MonoBehaviour
 {
-    int enemyHealth = 10;
+    
+    
     AudioSource hitSound;
+
+    Tower tower;
 
     [Header("Enemy FX")]
     [SerializeField] ParticleSystem hitParticles;
     [SerializeField] public ParticleSystem deathParticles;
 
+    [Header("Enemy Data")]
+    [SerializeField] int enemyHealth = 10;
+    int enemyBaseHealth;
+    
+    [SerializeField] public int cashPerKill = 10;
+
+
     PlayerMoney playerMoney;
     MoneyTracker moneyTracker;
+    [Header("Weapon data(Don't change)")]
+    public WeaponData weaponData;
+
+    ScoreTracker scoreTracker;
 
    
    
@@ -20,7 +34,10 @@ public class EnemyHitDetector : MonoBehaviour
         hitSound = gameObject.GetComponent<AudioSource>();
         playerMoney = FindObjectOfType<PlayerMoney>();
         moneyTracker = FindObjectOfType<MoneyTracker>();
-        
+        scoreTracker = FindObjectOfType<ScoreTracker>();
+        enemyBaseHealth = enemyHealth;
+
+
 
     }
 
@@ -32,7 +49,8 @@ public class EnemyHitDetector : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        enemyHealth--;
+        weaponData = other.GetComponent<WeaponData>();
+        enemyHealth -= weaponData.weaponDamage;
         hitParticles.Play();
         hitSound.Play();
         
@@ -41,8 +59,11 @@ public class EnemyHitDetector : MonoBehaviour
             Instantiate(deathParticles,transform.position,Quaternion.identity);
             Destroy(gameObject.transform.parent.gameObject);
 
-            playerMoney.playerMoney += 50; // todo Make less stupid way to increase money
+            playerMoney.playerMoney += cashPerKill;
             moneyTracker.UpdateMoney(playerMoney.playerMoney);
+            scoreTracker.score += enemyBaseHealth;
+            scoreTracker.UpdateScore();
+
 
 
 

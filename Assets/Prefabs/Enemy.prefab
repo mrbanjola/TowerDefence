@@ -9507,6 +9507,9 @@ MonoBehaviour:
   hitParticles: {fileID: 1401564064}
   deathParticles: {fileID: 7666892212924274978, guid: 225eba2401b5b4c96b212c70a65d1eda,
     type: 3}
+  enemyHealth: 10
+  cashPerKill: 10
+  weaponData: {fileID: 0}
 --- !u!82 &1515330200
 AudioSource:
   m_ObjectHideFlags: 0

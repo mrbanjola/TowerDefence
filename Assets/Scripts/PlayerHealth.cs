@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerHealth <= 0)
+        {
+            SceneManager.LoadScene(0);
+        }
         
     }
 
@@ -27,4 +32,4 @@ public class PlayerHealth : MonoBehaviour
         playerHealth -= 10;
         textmesh.text = string.Format("x {0}", playerHealth);
     }
-}
+}   

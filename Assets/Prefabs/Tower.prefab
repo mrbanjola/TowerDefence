@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1104835339}
   - component: {fileID: 1104835338}
   - component: {fileID: 1104835337}
+  - component: {fileID: 7022930637912462651}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -4712,6 +4713,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetEnemy: {fileID: 0}
+--- !u!114 &7022930637912462651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104835336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df09c3fd85a44bafa4129e7f35802ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDamage: 1
 --- !u!1 &122857015823651239
 GameObject:
   m_ObjectHideFlags: 0
@@ -4760,6 +4774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingPart: {fileID: 124670939158141409}
   distanceDetector: {fileID: 1104835337}
+  fireParticles: {fileID: 0}
   baseWorldBlock: {fileID: 0}
 --- !u!82 &82552496748323270
 AudioSource:

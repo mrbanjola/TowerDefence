@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TowerFactory : MonoBehaviour
 {
-    [SerializeField] int towerLimit = 5;
+    [SerializeField] public int towerLimit = 5;
     [SerializeField] Tower towerPrefab;
     [SerializeField] Transform towerGroup;
 
@@ -40,6 +40,9 @@ public class TowerFactory : MonoBehaviour
                 MoveExistingTower(baseWorldBlock);
 
             }
+        } else
+        {
+            MoveExistingTower(baseWorldBlock);
         }
         
         
@@ -53,7 +56,7 @@ public class TowerFactory : MonoBehaviour
         oldTower.baseWorldBlock.isPlaceable = true;
         newBaseWorldBlock.isPlaceable = false;
         oldTower.baseWorldBlock = newBaseWorldBlock;
-        oldTower.transform.position = newBaseWorldBlock.transform.position + new Vector3(0, enemySpawner.heightAdjust, 0);
+        oldTower.transform.position = newBaseWorldBlock.transform.position;
         oldTower.GetComponent<AudioSource>().Play();
         towerQueue.Enqueue(oldTower);
         
@@ -64,7 +67,7 @@ public class TowerFactory : MonoBehaviour
 
     private void InstantiateNewTower(WorldBlock baseWorldBlock)
     {
-        var newTower = Instantiate(towerPrefab, baseWorldBlock.transform.position + new Vector3(0, enemySpawner.heightAdjust,0), Quaternion.identity, towerGroup);
+        var newTower = Instantiate(towerPrefab, baseWorldBlock.transform.position , Quaternion.identity, towerGroup);
         newTower.baseWorldBlock = baseWorldBlock;
         baseWorldBlock.isPlaceable = false;
         currentTowers++;

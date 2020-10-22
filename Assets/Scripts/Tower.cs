@@ -21,6 +21,7 @@ public class Tower : MonoBehaviour
     void Update()
     {
         TargetEnemy();
+
         UpGradeTowers();
     }
 

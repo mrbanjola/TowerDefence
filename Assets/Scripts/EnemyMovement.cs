@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] ParticleSystem moveParticles;
 
-    // Start is called before the first frame update 
+
     void Start()
     {
         pathFinder = FindObjectOfType<PathFinder>();
@@ -30,44 +30,29 @@ public class EnemyMovement : MonoBehaviour
 
     IEnumerator MovePlayer(List<Vector3Int> path)
     {
-        transform.position = path[0] * 10 + new Vector3Int(-10, 10, 0);
+        transform.position = path[0] * 10;
 
         foreach (Vector3Int step in path)
         {
 
             Vector3 currentPosition = transform.position;
 
-           
-
-            Vector3Int startPositionInt = new Vector3Int(Mathf.RoundToInt(currentPosition.x), Mathf.RoundToInt(currentPosition.y), Mathf.RoundToInt(currentPosition.z));
-
-            print(string.Format("I am at: {0}", startPositionInt));
-
-            Vector3Int direction = (step * 10) - startPositionInt;
-            direction.y = 0;
-
-            print(string.Format("New direction: {0}", direction));
-
-            Vector3Int nextStep = new Vector3Int(direction.x / 10, 0, direction.z / 10);
-
-            print(string.Format("New divided direction: {0}", nextStep));
-
-            print(string.Format("I should probably go to: {0}",startPositionInt +  new Vector3Int(direction.x/10,direction.y/10,direction.z/10)));
-
+            Vector3Int startPositionInt, nextStep;
+            DivideMovement(step, currentPosition, out startPositionInt, out nextStep);
 
             for (int i = 1; i <= 10; i++)
             {
 
                 Moveto(startPositionInt + (nextStep * i));
 
-                print(string.Format("After {0} stahps, I am at {1}", i, transform.position));
+               
 
                 yield return new WaitForSeconds(stepDelay);
             }
 
 
 
-                
+
 
 
 
@@ -78,7 +63,18 @@ public class EnemyMovement : MonoBehaviour
 
     }
 
-    
+    private static void DivideMovement(Vector3Int step, Vector3 currentPosition, out Vector3Int startPositionInt, out Vector3Int nextStep)
+    {
+        startPositionInt = new Vector3Int(Mathf.RoundToInt(currentPosition.x), Mathf.RoundToInt(currentPosition.y), Mathf.RoundToInt(currentPosition.z));
+       
+        Vector3Int direction = (step * 10) - startPositionInt;
+        direction.y = 0;
+
+        
+        nextStep = new Vector3Int(direction.x / 10, 0, direction.z / 10);
+        
+    }
+
 
     private void Moveto(Vector3Int step)
     {
@@ -100,11 +96,6 @@ public class EnemyMovement : MonoBehaviour
     }
 
 
-    // todo Make less stupid way to increase money
-    public void EnemyDied()
-    {
-        SendMessageUpwards("IncreaseMoney"); // todo Make less stupid way to increase money
-    }
 
 
 } 
