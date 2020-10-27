@@ -27,6 +27,8 @@ public class EnemyHitDetector : MonoBehaviour
 
     ScoreTracker scoreTracker;
 
+    TowerKills towerKills;
+
    
    
     void Start()
@@ -36,6 +38,7 @@ public class EnemyHitDetector : MonoBehaviour
         moneyTracker = FindObjectOfType<MoneyTracker>();
         scoreTracker = FindObjectOfType<ScoreTracker>();
         enemyBaseHealth = enemyHealth;
+        towerKills = FindObjectOfType<TowerKills>();
 
 
 
@@ -63,6 +66,9 @@ public class EnemyHitDetector : MonoBehaviour
             moneyTracker.UpdateMoney(playerMoney.playerMoney);
             scoreTracker.score += enemyBaseHealth;
             scoreTracker.UpdateScore();
+            weaponData.kills++;
+            
+
 
 
 

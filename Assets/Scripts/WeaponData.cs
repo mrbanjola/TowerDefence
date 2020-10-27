@@ -6,6 +6,8 @@ public class WeaponData : MonoBehaviour
 
 {
     public int weaponDamage = 2;
+    public int upgradePrice = 100;
+    public int kills = 0;
     UpgradeTowers upgradeTowers;
 
 
@@ -18,6 +20,13 @@ public class WeaponData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        weaponDamage = upgradeTowers.damage;
+        
+    }
+
+
+
+    public void UpdateDamage()
+    {
+        weaponDamage++;
     }
 }

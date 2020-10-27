@@ -10,6 +10,8 @@ public class Tower : MonoBehaviour
     [SerializeField] DistanceDetector distanceDetector;
     public ParticleSystem fireParticles;
 
+    public UpgradeTowers upgradeTowers;
+
     public WorldBlock baseWorldBlock;
 
 
@@ -22,20 +24,8 @@ public class Tower : MonoBehaviour
     {
         TargetEnemy();
 
-        UpGradeTowers();
     }
 
-    private void UpGradeTowers()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            var main = fireParticles.main;
-
-            main.startSize = 17f;
-
-
-        }
-    }
 
    
 

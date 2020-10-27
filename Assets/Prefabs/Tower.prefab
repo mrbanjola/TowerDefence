@@ -4737,6 +4737,8 @@ GameObject:
   - component: {fileID: 122857015823651233}
   - component: {fileID: 122857015823651232}
   - component: {fileID: 82552496748323270}
+  - component: {fileID: 7446965162704430807}
+  - component: {fileID: 5709935789554648107}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -4775,6 +4777,7 @@ MonoBehaviour:
   movingPart: {fileID: 124670939158141409}
   distanceDetector: {fileID: 1104835337}
   fireParticles: {fileID: 0}
+  upgradeTowers: {fileID: 0}
   baseWorldBlock: {fileID: 0}
 --- !u!82 &82552496748323270
 AudioSource:
@@ -4872,6 +4875,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7446965162704430807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122857015823651239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec6ac194309f466fb5d0c02a8e200ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeTowers: {fileID: 0}
+  upgradeText: {fileID: 0}
+--- !u!136 &5709935789554648107
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122857015823651239}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 7
+  m_Height: 20
+  m_Direction: 1
+  m_Center: {x: 0, y: 10.51, z: 0}
 --- !u!1001 &122857016737510087
 PrefabInstance:
   m_ObjectHideFlags: 0

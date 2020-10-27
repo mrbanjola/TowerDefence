@@ -7,9 +7,13 @@ public class UpgradeTowers : MonoBehaviour
     public int damage = 1;
     Button btn;
 
+    public WeaponData towerToUpgrade;
+
+
     PlayerMoney playerMoney;
     MoneyTracker moneyTracker;
-    int upgradePrice = 400;
+    CurrentDamage currentDamage;
+    int upgradePrice = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -17,32 +21,43 @@ public class UpgradeTowers : MonoBehaviour
         playerMoney = FindObjectOfType<PlayerMoney>();
         moneyTracker = FindObjectOfType<MoneyTracker>();
         btn = GetComponent<Button>();
+        currentDamage = FindObjectOfType<CurrentDamage>();
         btn.onClick.AddListener(IncreaseDamage);
+        UpdateText(100);
         
     }
 
     void IncreaseDamage()
     {
-        if (playerMoney.playerMoney >= upgradePrice)
+        if (playerMoney.playerMoney >= towerToUpgrade.upgradePrice)
         {
-            damage++;
+            
+            towerToUpgrade.UpdateDamage();
             playerMoney.playerMoney -= upgradePrice;
             moneyTracker.UpdateMoney(playerMoney.playerMoney);
-            upgradePrice += 300;
-            UpdateText();
+            towerToUpgrade.upgradePrice += 100;
+            UpdateText(towerToUpgrade.upgradePrice);
+            currentDamage.UpdateText(towerToUpgrade.weaponDamage);
         }
        
     }
 
-    void UpdateText()
+    public void UpdateText(int price)
     {
-        GetComponent<TextMeshProUGUI>().text = string.Format("Upgrade towers (${0})",upgradePrice);
+        GetComponent<TextMeshProUGUI>().text = string.Format("Upgrade tower (${0})",price);
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if (towerToUpgrade != null)
+        {
+            upgradePrice = towerToUpgrade.upgradePrice;
+        } else
+        {
+            upgradePrice = 100;
+        }
 
         if (playerMoney.playerMoney < upgradePrice)
         {
@@ -51,6 +66,8 @@ public class UpgradeTowers : MonoBehaviour
         {
             GetComponent<TextMeshProUGUI>().color = Color.white;
         }
+
+        
 
 
     }
