@@ -57,7 +57,7 @@ public class EnemyHitDetector : MonoBehaviour
         if (enemyHealth <= 0)
         {
             Instantiate(deathParticles,transform.position,Quaternion.identity);
-            Destroy(gameObject.transform.parent.gameObject);
+            Destroy(gameObject);
 
             playerMoney.playerMoney += cashPerKill;
             moneyTracker.UpdateMoney(playerMoney.playerMoney);

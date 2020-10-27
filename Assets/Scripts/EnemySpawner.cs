@@ -61,10 +61,10 @@ public class EnemySpawner : MonoBehaviour
             {
                 if (level < 3)
                 {
-                    Instantiate(easyEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0), Quaternion.identity, enemies);
+                    Instantiate(easyEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0),Quaternion.Euler(0f,40f,0f) ,enemies);
                 } else
                 {
-                    Instantiate(mediumEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0), Quaternion.identity, enemies);
+                    Instantiate(mediumEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0), Quaternion.Euler(0f,40f,0f), enemies);
                 }
                
 
@@ -72,22 +72,22 @@ public class EnemySpawner : MonoBehaviour
             {
                 if (level < 3)
                 {
-                    Instantiate(hardEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0), Quaternion.identity, enemies);
+                    Instantiate(hardEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0), Quaternion.Euler(0f,40f,0f), enemies);
                 }
                 else
                 {
-                    Instantiate(reallyHardEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0), Quaternion.identity, enemies);
+                    Instantiate(reallyHardEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0), Quaternion.Euler(0f,40f,0f), enemies);
                 }
             }
             else
             {
                 if (level < 3)
                 {
-                    Instantiate(mediumEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0), Quaternion.identity, enemies);
+                    Instantiate(mediumEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0), Quaternion.Euler(0f,40f,0f), enemies);
                 }
                 else
                 {
-                    Instantiate(hardEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0), Quaternion.identity, enemies);
+                    Instantiate(hardEnemy, FindObjectOfType<PathFinder>().getPath()[0] + new Vector3Int(0, heightAdjust, 0), Quaternion.Euler(0f,40f,0f), enemies);
                 }
             }
             
