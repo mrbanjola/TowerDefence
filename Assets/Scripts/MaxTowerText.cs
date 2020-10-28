@@ -7,6 +7,7 @@ public class MaxTowerText : MonoBehaviour
     TowerFactory towerFactory;
     PlayerMoney playerMoney;
     MoneyTracker moneyTracker;
+    TowerCounter towerCounter;
     Button btn;
     int increasePrize = 300;
 
@@ -16,6 +17,7 @@ public class MaxTowerText : MonoBehaviour
         playerMoney = FindObjectOfType<PlayerMoney>();
         towerFactory = FindObjectOfType<TowerFactory>();
         moneyTracker = FindObjectOfType<MoneyTracker>();
+        towerCounter = FindObjectOfType<TowerCounter>();
         btn = GetComponent<Button>();
         btn.onClick.AddListener(IncreaseTowers);
     }
@@ -29,6 +31,7 @@ public class MaxTowerText : MonoBehaviour
             moneyTracker.UpdateMoney(playerMoney.playerMoney);
             increasePrize += 100;
             gameObject.GetComponent<TextMeshProUGUI>().text = string.Format("Increase max towers (${0})",increasePrize);
+            towerCounter.updateCount();
 
         }
     }

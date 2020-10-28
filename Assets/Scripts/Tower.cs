@@ -10,8 +10,6 @@ public class Tower : MonoBehaviour
     [SerializeField] DistanceDetector distanceDetector;
     public ParticleSystem fireParticles;
 
-    public UpgradeTowers upgradeTowers;
-
     public WorldBlock baseWorldBlock;
 
 

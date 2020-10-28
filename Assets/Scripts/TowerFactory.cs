@@ -10,8 +10,12 @@ public class TowerFactory : MonoBehaviour
 
     PlayerMoney playerMoney;
     MoneyTracker moneyTracker;
+    TowerCounter towerCounter;
 
     public int towerPrice = 150;
+
+    UpgradeTowers upgradeTowers;
+
 
     EnemySpawner enemySpawner;
 
@@ -29,10 +33,12 @@ public class TowerFactory : MonoBehaviour
 
             if (currentTowers < towerLimit)
             {
-                print(string.Format("You clicked {0}, a fine place for a tower!", baseWorldBlock.name));
-                InstantiateNewTower(baseWorldBlock);
+                
+                upgradeTowers.towerToUpgrade = InstantiateNewTower(baseWorldBlock);
+
                 playerMoney.playerMoney -= towerPrice;
                 moneyTracker.UpdateMoney(playerMoney.playerMoney);
+                
 
             }
             else
@@ -59,19 +65,22 @@ public class TowerFactory : MonoBehaviour
         oldTower.transform.position = newBaseWorldBlock.transform.position;
         oldTower.GetComponent<AudioSource>().Play();
         towerQueue.Enqueue(oldTower);
+
         
         
         
-        // todo Actually move
+       
     }
 
-    private void InstantiateNewTower(WorldBlock baseWorldBlock)
+    private WeaponData InstantiateNewTower(WorldBlock baseWorldBlock)
     {
         var newTower = Instantiate(towerPrefab, baseWorldBlock.transform.position , Quaternion.identity, towerGroup);
         newTower.baseWorldBlock = baseWorldBlock;
         baseWorldBlock.isPlaceable = false;
         currentTowers++;
         towerQueue.Enqueue(newTower);
+        towerCounter.updateCount();
+        return newTower.GetComponentInChildren<WeaponData>();
     }
 
     void Start()
@@ -79,9 +88,11 @@ public class TowerFactory : MonoBehaviour
         enemySpawner = gameObject.GetComponent<EnemySpawner>();
         playerMoney = FindObjectOfType<PlayerMoney>();
         moneyTracker = FindObjectOfType<MoneyTracker>();
+        upgradeTowers = FindObjectOfType<UpgradeTowers>();
+        towerCounter = FindObjectOfType<TowerCounter>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
