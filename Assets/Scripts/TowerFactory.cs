@@ -38,6 +38,7 @@ public class TowerFactory : MonoBehaviour
             {
                 
                 upgradeTowers.towerToUpgrade = InstantiateNewTower(baseWorldBlock);
+                
 
                 playerMoney.playerMoney -= towerPrice;
                 moneyTracker.UpdateMoney(playerMoney.playerMoney);
