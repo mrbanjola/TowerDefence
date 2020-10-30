@@ -1,4 +1,8 @@
 ﻿using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class DistanceDetector : MonoBehaviour
 {
@@ -8,12 +12,12 @@ public class DistanceDetector : MonoBehaviour
     Vector3 towerPosition;
     Vector3 distanceVector;
     public GameObject targetEnemy;
-    ParticleSystem gun;
+    List<ParticleSystem> guns = new List<ParticleSystem>();
     
     // Start is called before the first frame update
     void Start()
     {
-        gun = gameObject.GetComponent<ParticleSystem>();
+        guns = gameObject.GetComponents<ParticleSystem>().ToList();
         
         
        
@@ -68,15 +72,25 @@ public class DistanceDetector : MonoBehaviour
 
     private void FireGuns()
     {
-        var emissionModule = gun.emission;
+        
         if (distance <= 30f)
         {
-            emissionModule.enabled = true;
+            foreach (ParticleSystem weapon in guns)
+            {
+                var emissionModule = weapon.emission;
+                emissionModule.enabled = true;
+            }
+           
+            print("Pew");
 
         }
         else
         {
-            emissionModule.enabled = false;
+            foreach (ParticleSystem weapon in guns)
+            {
+                var emissionModule = weapon.emission;
+                emissionModule.enabled = false;
+            }
         }
     }
 

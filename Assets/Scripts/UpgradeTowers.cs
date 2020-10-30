@@ -13,6 +13,9 @@ public class UpgradeTowers : MonoBehaviour
     PlayerMoney playerMoney;
     MoneyTracker moneyTracker;
     CurrentDamage currentDamage;
+    public TowerInfo towerInfo;
+    TowerFactory towerFactory;
+
     int upgradePrice = 100;
 
     // Start is called before the first frame update
@@ -23,6 +26,7 @@ public class UpgradeTowers : MonoBehaviour
         btn = GetComponent<Button>();
         currentDamage = FindObjectOfType<CurrentDamage>();
         btn.onClick.AddListener(IncreaseDamage);
+
         UpdateText(100);
         
     }
@@ -35,7 +39,7 @@ public class UpgradeTowers : MonoBehaviour
             towerToUpgrade.UpdateDamage();
             playerMoney.playerMoney -= upgradePrice;
             moneyTracker.UpdateMoney(playerMoney.playerMoney);
-            towerToUpgrade.upgradePrice += 100;
+            towerToUpgrade.upgradePrice += towerToUpgrade.increasePerUpgrade;
             UpdateText(towerToUpgrade.upgradePrice);
             currentDamage.UpdateText(towerToUpgrade.weaponDamage);
         }

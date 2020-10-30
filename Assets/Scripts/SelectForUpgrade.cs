@@ -27,6 +27,7 @@ public class SelectForUpgrade : MonoBehaviour
             upgradeText.enabled = true;
             upgradeTowers.UpdateText(gameObject.GetComponentInChildren<WeaponData>().upgradePrice);
             
+            
         }
         
     }

@@ -5,14 +5,15 @@ using UnityEngine;
 public class TowerFactory : MonoBehaviour
 {
     [SerializeField] public int towerLimit = 5;
-    [SerializeField] Tower towerPrefab;
+    [SerializeField] public Tower towerPrefab;
     [SerializeField] Transform towerGroup;
 
     PlayerMoney playerMoney;
     MoneyTracker moneyTracker;
     TowerCounter towerCounter;
+    public TowerInfo towerInfo;
 
-    public int towerPrice = 150;
+    public int towerPrice;
 
     UpgradeTowers upgradeTowers;
 
@@ -27,6 +28,8 @@ public class TowerFactory : MonoBehaviour
 
     public void AddTower(WorldBlock baseWorldBlock)
     {
+        towerPrice = towerPrefab.GetComponent<TowerInfo>().towerPrice;
+
         if (playerMoney.playerMoney >= towerPrice)
         {
             currentTowers = towerQueue.Count;
@@ -42,13 +45,20 @@ public class TowerFactory : MonoBehaviour
 
             }
             else
-            {
+            {   
                 MoveExistingTower(baseWorldBlock);
 
             }
         } else
         {
-            MoveExistingTower(baseWorldBlock);
+            try
+            {
+                MoveExistingTower(baseWorldBlock);
+            } catch
+            {
+
+            }
+            
         }
         
         
@@ -90,6 +100,8 @@ public class TowerFactory : MonoBehaviour
         moneyTracker = FindObjectOfType<MoneyTracker>();
         upgradeTowers = FindObjectOfType<UpgradeTowers>();
         towerCounter = FindObjectOfType<TowerCounter>();
+        towerInfo = towerPrefab.GetComponent<TowerInfo>();
+        towerPrice = towerInfo.towerPrice;
     }
 
     

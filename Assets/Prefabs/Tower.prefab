@@ -4726,6 +4726,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamage: 1
+  WeaponDatas:
+  - {fileID: 7022930637912462651}
+  upgradePrice: 100
+  increasePerUpgrade: 100
+  kills: 0
 --- !u!1 &122857015823651239
 GameObject:
   m_ObjectHideFlags: 0
@@ -4739,6 +4744,7 @@ GameObject:
   - component: {fileID: 82552496748323270}
   - component: {fileID: 7446965162704430807}
   - component: {fileID: 5709935789554648107}
+  - component: {fileID: 114932627289594534}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -4777,7 +4783,6 @@ MonoBehaviour:
   movingPart: {fileID: 124670939158141409}
   distanceDetector: {fileID: 1104835337}
   fireParticles: {fileID: 0}
-  upgradeTowers: {fileID: 0}
   baseWorldBlock: {fileID: 0}
 --- !u!82 &82552496748323270
 AudioSource:
@@ -4889,6 +4894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTowers: {fileID: 0}
   upgradeText: {fileID: 0}
+  currentDamageText: {fileID: 0}
 --- !u!136 &5709935789554648107
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4903,6 +4909,19 @@ CapsuleCollider:
   m_Height: 20
   m_Direction: 1
   m_Center: {x: 0, y: 10.51, z: 0}
+--- !u!114 &114932627289594534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122857015823651239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797aa19ff5b184a1793366764dad0b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerPrice: 150
 --- !u!1001 &122857016737510087
 PrefabInstance:
   m_ObjectHideFlags: 0
