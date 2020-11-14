@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float spawnDelay = 3f;
     [SerializeField] public int heightAdjust = 10;
 
-
+    PlayerMoney playerMoney;
     AudioSource spawnSound;
     System.Random rnd;
 
@@ -26,6 +26,7 @@ public class EnemySpawner : MonoBehaviour
     {
         rnd = new System.Random();
         spawnSound = GetComponent<AudioSource>();
+        playerMoney = FindObjectOfType<PlayerMoney>();
 
         StartCoroutine(SpawnEnemies(1,spawnDelay));
 
@@ -68,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
                 }
                
 
-            } else if (enemyType <= (100 * level) - difficulty/5 && difficulty > (100 * level) - difficulty / 2 * level)
+            } else if (enemyType <= (100 * level) - difficulty/5 && enemyType > (100 * level) - difficulty / 2 * level)
             {
                 if (level < 3)
                 {
@@ -100,6 +101,7 @@ public class EnemySpawner : MonoBehaviour
             if (i == (100 * level) - 1)
             {
                 levelComplete = true;
+                playerMoney.playerMoney += level * 100;
             }
 
             yield return new WaitForSeconds(spawnWait);

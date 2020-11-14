@@ -51,12 +51,6 @@ public class EnemyMovement : MonoBehaviour
             }
 
 
-
-
-
-
-
-
         }
 
         SelfDestruct();

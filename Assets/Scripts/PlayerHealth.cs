@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         print("Ooops");
-        Handheld.Vibrate();
+        // Handheld.Vibrate(); Only for mobile version
         playerHealth -= 10;
         textmesh.text = string.Format("x {0}", playerHealth);
     }
