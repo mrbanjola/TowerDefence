@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TowerFactory : MonoBehaviour
@@ -22,7 +23,7 @@ public class TowerFactory : MonoBehaviour
 
     public WorldBlock baseWorldBlock;
 
-    Queue<Tower> towerQueue = new Queue<Tower>();
+    Dictionary<WorldBlock, Tower> towerQueue = new Dictionary<WorldBlock, Tower>();
 
     int currentTowers = 0;
 
@@ -36,60 +37,58 @@ public class TowerFactory : MonoBehaviour
 
             if (currentTowers < towerLimit)
             {
-                
+
                 upgradeTowers.towerToUpgrade = InstantiateNewTower(baseWorldBlock);
-                
+
 
                 playerMoney.playerMoney -= towerPrice;
                 moneyTracker.UpdateMoney(playerMoney.playerMoney);
-                
+
 
             }
             else
-            {   
+            {
                 MoveExistingTower(baseWorldBlock);
 
             }
-        } else
+        }
+        else
         {
             try
             {
                 MoveExistingTower(baseWorldBlock);
-            } catch
+            }
+            catch
             {
 
             }
-            
-        }
-        
-        
 
+        }
     }
 
     private void MoveExistingTower(WorldBlock newBaseWorldBlock)
     {
         print("Too many towers dickwad");
-        var oldTower = towerQueue.Dequeue();
+        var oldTower = towerQueue[upgradeTowers.towerToUpgrade.GetComponentInParent<Tower>().baseWorldBlock];
         oldTower.baseWorldBlock.isPlaceable = true;
         newBaseWorldBlock.isPlaceable = false;
+        towerQueue.Remove(oldTower.baseWorldBlock);
+
         oldTower.baseWorldBlock = newBaseWorldBlock;
         oldTower.transform.position = newBaseWorldBlock.transform.position;
         oldTower.GetComponent<AudioSource>().Play();
-        towerQueue.Enqueue(oldTower);
 
-        
-        
-        
-       
+        towerQueue.Add(newBaseWorldBlock, oldTower);
+
     }
 
     private WeaponData InstantiateNewTower(WorldBlock baseWorldBlock)
     {
-        var newTower = Instantiate(towerPrefab, baseWorldBlock.transform.position , Quaternion.identity, towerGroup);
+        var newTower = Instantiate(towerPrefab, baseWorldBlock.transform.position, Quaternion.identity, towerGroup);
         newTower.baseWorldBlock = baseWorldBlock;
         baseWorldBlock.isPlaceable = false;
         currentTowers++;
-        towerQueue.Enqueue(newTower);
+        towerQueue.Add(baseWorldBlock, newTower);
         towerCounter.updateCount();
         return newTower.GetComponentInChildren<WeaponData>();
     }
@@ -105,9 +104,9 @@ public class TowerFactory : MonoBehaviour
         towerPrice = towerInfo.towerPrice;
     }
 
-    
+
     void Update()
     {
-        
+
     }
 }
